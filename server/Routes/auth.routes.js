@@ -1,6 +1,8 @@
 const Router = require('express');
 const User = require('../Models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const config = require('config')
 const router = new Router()
 
 router.post('/registration', async (req, res)=> {
@@ -17,8 +19,8 @@ router.post('/registration', async (req, res)=> {
             if(candidate){
                 return res.status(400).json({message: `User with nickname - ${nickname} already exist`})
             }
-            const hashPassword = await bcrypt.hash(password, 15);
-            const user = new User({nickname, hashPassword})
+            const hashPassword = await bcrypt.hash(password, 7);
+            const user = new User({nickname, password: hashPassword})
             await user.save();
             return res.status(201).json('User has been created')
 
@@ -27,5 +29,37 @@ router.post('/registration', async (req, res)=> {
             res.send({message: "Server error"})
         }
 })
+
+router.post('/login', async (req, res)=> {
+    try{
+        const {nickname, password} = req.body;
+        const user = await User.findOne({nickname});
+        if(!user){
+            return res.status(404).json({message: "User not found"})
+        }
+        const isPassValid = bcrypt.compareSync(password, user.password);
+        if(!isPassValid){
+            return res.status(400).json({message: "Incorrect password"});
+        }
+
+        const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: '1h'})
+
+        return res.status(202).json({
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                discSpace: user.discSpace,
+                usedSpace: user.usedSpace,
+                avatar: user.avatar,
+            }
+        })
+
+    }catch (e){
+        console.log(e)
+        res.send({message: "Server error"})
+    }
+})
+
 
 module.exports = router
