@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const router = new Router()
+const authMiddleware = require('../Middleware/auth.middleware')
 
 router.post('/registration', async (req, res)=> {
         try{
@@ -55,6 +56,30 @@ router.post('/login', async (req, res)=> {
             }
         })
 
+    }catch (e){
+        console.log(e)
+        res.send({message: "Server error"})
+    }
+})
+
+
+router.get('/auth', authMiddleware,
+    async (req, res)=> {
+    try{
+        const user = await User.findOne({_id: req.user.id});
+
+        const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: '1h'})
+
+        return res.status(202).json({
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                discSpace: user.discSpace,
+                usedSpace: user.usedSpace,
+                avatar: user.avatar,
+            }
+        })
     }catch (e){
         console.log(e)
         res.send({message: "Server error"})
