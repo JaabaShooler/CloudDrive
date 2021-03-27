@@ -1,5 +1,6 @@
 {
   "serverPort": 5000,
   "url": "mongodb+srv://User:asdqwe123@cluster0.erdbs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "secretKey": "This is secret key!!!DONT TOUCH."
+  "secretKey": "This is secret key!!!DONT TOUCH.",
+  "filesPath": "C:\\main\\Projects\\React\\drive\\server\\files"
 }
