@@ -1,0 +1,33 @@
+// 100 Extra Light or Ultra Light;
+// 200 Light or Thin;
+// 300 Book or Demi;
+// 400 Regular or Normal;
+// 500 Medium;
+// 600 Semibold or Demibold;
+// 700 Bold;
+// 800 Black or Extra Bold or Heavy;
+// 900 Extra Black or Fat or Ultra Black
+
+@mixin font($f-name, $f-style, $f-weight, $f-url)
+  @font-face
+    font-display: swap
+    font-family: $f-name
+    font-style: $f-style
+    font-weight: $f-weight
+    src: url($f-url) format('woff')
+
+@include font('Campton', normal, 900, '../Fonts/Campton-ExtraBold.woff')
+@include font('Campton', normal, 700, '../Fonts/Campton-Bold.woff')
+@include font('Campton', normal, 400, '../Fonts/Campton-Medium.woff')
+@include font('Campton', normal, 300, '../Fonts/Campton-Book.woff')
+@include font('Campton', normal, 200, '../Fonts/Campton-Light.woff')
+@include font('Campton', normal, 100, '../Fonts/Campton-ExtraLight.woff')
+
+@include font('Campton', italic, 900, '../Fonts/Campton-ExtraBoldItalic.woff')
+@include font('Campton', italic, 700, '../Fonts/Campton-BoldItalic.woff')
+@include font('Campton', italic, 500, '../Fonts/Campton-MediumItalic.woff')
+@include font('Campton', italic, 300, '../Fonts/Campton-BookItalic.woff')
+@include font('Campton', italic, 200, '../Fonts/Campton-LightItalic.woff')
+@include font('Campton', italic, 200, '../Fonts/Campton-ExtraLightItalic.woff')
+
+
