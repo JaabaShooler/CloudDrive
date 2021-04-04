@@ -10,10 +10,12 @@ import logo from "../../Logo.png"
 
 
 
+
 const NavBar = () => {
 
     const isAuth = useSelector(state => state.user.isAuth)
     const dispatch = useDispatch()
+
 
 
     return (

@@ -19,7 +19,7 @@ class FileController{
             }
 
             await file.save();
-            return res.json(file);
+            return res.status(200).json(file);
         }catch (e) {
             console.log(e);
             return res.status(400).json(e)
@@ -29,7 +29,7 @@ class FileController{
     async fetchFiles(req, res){
         try{
             const files = await  File.find({user: req.user.id, parent: req.body.parent})
-            return res.json({files})
+            return res.json(files)
         }catch (e) {
             console.log(e);
             return res.status(400).json(e)

@@ -1,0 +1,15 @@
+.file-list
+  margin-top: 20px
+  &__header
+    display: grid
+    grid-template-columns: 100px 400px repeat(4, 100px)
+    .file-list__name
+      grid-column-start: 2
+    .file-list__date
+      grid-column-start: 5
+      justify-content: center
+      text-align: center
+    .file-list__size
+      grid-column-start: 7
+      justify-content: center
+      text-align: center
