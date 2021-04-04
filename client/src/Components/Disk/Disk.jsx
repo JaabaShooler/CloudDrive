@@ -4,11 +4,12 @@ import {createDir, fetchFiles} from "../../API/files";
 import "../Disk/Disk.sass"
 import FileList from "./FileList/FileList";
 import Popup from "./Popup";
-import {displayPopup} from "../../Reducers/fileReducer";
+import {displayPopup, setCurrentDir} from "../../Reducers/fileReducer";
 
 const Disk = () => {
     const dispatch = useDispatch();
     const currentDir = useSelector(state => state.file.currentDir)
+    const dirStack = useSelector(state => state.file.dirStack)
 
     React.useEffect(()=>{
         console.log(currentDir)
@@ -16,7 +17,12 @@ const Disk = () => {
     },[currentDir])
 
     function showPopup(){
-        dispatch(displayPopup("flex"))
+        dispatch(displayPopup(1))
+    }
+
+    function backHandler(){
+        const i = dirStack.pop();
+        dispatch(setCurrentDir(i));
     }
 
 
@@ -25,7 +31,7 @@ const Disk = () => {
             <Popup currentDir={currentDir}/>
             <div className="disc__wrapper">
                 <div className="disc__buttons">
-                    <button className="button back"> Back </button>
+                    <button className="button back" onClick={() => backHandler() }  disabled={currentDir ? "" : "disabled"}> Back </button>
                     <button className="button create" onClick={() => showPopup()}> Create a folder</button>
                 </div>
                 <FileList/>

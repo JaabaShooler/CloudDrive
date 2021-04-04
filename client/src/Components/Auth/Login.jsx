@@ -26,7 +26,7 @@ const Login = () => {
         const box = document.querySelectorAll('.box--item');
         const speedArr = []
         for(let i = 0; i <= box.length; i++){
-            speedArr.push(Math.random()*0.1 + i*0.01)
+            speedArr.push(Math.random()*0.01 + i*0.01)
         }
         document.body.addEventListener('mousemove', e=>{
             selection(box, e, speedArr)
