@@ -6,11 +6,6 @@ import "../Sass/NavBar.sass"
 import logo from "../../Logo.png"
 
 
-
-
-
-
-
 const NavBar = () => {
 
     const isAuth = useSelector(state => state.user.isAuth)
@@ -25,7 +20,7 @@ const NavBar = () => {
                 <div className='navbar__wrapper--links'>
                     {!isAuth && <div><NavLink to="/login">Login</NavLink></div>}
                     {!isAuth && <div><NavLink to="/registration">Sign in</NavLink></div>}
-                    {isAuth && <div onClick={() => dispatch(logout())}>Logout</div>}
+                    {isAuth && <div className="logout" onClick={() => dispatch(logout())}>Logout</div>}
                 </div>
 
             </div>

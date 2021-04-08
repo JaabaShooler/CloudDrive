@@ -1,6 +1,6 @@
 import React from 'react';
-import folder from "../../../../Folder.png"
-import file from "../../../../File.png"
+import folder from "../../../../Folder.svg"
+import file from "../../../../File.svg"
 import "./FileStyles.sass"
 import {useDispatch, useSelector} from "react-redux";
 import {pushToStack, setCurrentDir} from "../../../../Reducers/fileReducer";

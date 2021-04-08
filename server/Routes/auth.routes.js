@@ -71,15 +71,16 @@ router.post('/login', async (req, res)=> {
 router.get('/auth', authMiddleware,
     async (req, res)=> {
     try{
+        // console.log(req);
         const user = await User.findOne({_id: req.user.id});
 
-        const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: '1h'})
+        const token = jwt.sign({id: user._id}, config.get("secretKey"), {expiresIn: '1h'})
 
         return res.status(202).json({
             token,
             user: {
                 id: user.id,
-                email: user.email,
+                nickname: user.nickname,
                 discSpace: user.discSpace,
                 usedSpace: user.usedSpace,
                 avatar: user.avatar,

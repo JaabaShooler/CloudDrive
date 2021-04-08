@@ -24,13 +24,18 @@ const Login = () => {
 
     React.useEffect(()=>{
         const box = document.querySelectorAll('.box--item');
+        const form = document.querySelector('.form');
+
         const speedArr = []
         for(let i = 0; i <= box.length; i++){
-            speedArr.push(Math.random()*0.01 + i*0.01)
+            speedArr.push(Math.random()*0.005 + i*0.005)
         }
         document.body.addEventListener('mousemove', e=>{
             selection(box, e, speedArr)
+
         })
+
+
         return () => {
             document.body.removeEventListener('mousemove', e => {})
         }
@@ -49,11 +54,13 @@ const Login = () => {
                 <div className="box--item"></div>
                 <div className="box--item"></div>
                 <div className="form">
-                    <div className="form__wrapper">
-                        <h2 className="form__header">Login</h2>
-                        <Input value={nickname} setValue={setNickname} type="text" placeholder="Enter your nickname"/>
-                        <Input value={password} setValue={setPassword} type="password" placeholder="Enter your password"/>
-                        <button className="form__button" onClick={() => dispatch(login(nickname, password))}>Login</button>
+                    <div className="form__element">
+                        <div className="form__wrapper">
+                            <h2 className="form__header">Login</h2>
+                            <Input value={nickname} setValue={setNickname} type="text" placeholder="Enter your nickname"/>
+                            <Input value={password} setValue={setPassword} type="password" placeholder="Enter your password"/>
+                            <button className="form__button" onClick={() => dispatch(login(nickname, password))}>Login</button>
+                        </div>
                     </div>
                 </div>
             </div>
